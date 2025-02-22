@@ -12,17 +12,17 @@
             font-family: 'Inter', sans-serif;
             background: radial-gradient(circle, #1e2a38, #0d1117);
             color: #e0e0e0;
-            line-height: 1.6;
+            line-height: 1.4;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Центрируем всё содержимое */
             justify-content: flex-start;
             min-height: 100vh;
             text-align: center;
-            padding: 0; /* Убрал лишние отступы для точного позиционирования */
+            padding: 0;
         }
 
-        /* Фиксированное прозрачное меню */
+        /* Навигационное меню (оставляем вверху, не центрируем) */
         .navbar {
             position: fixed;
             top: 0;
@@ -33,7 +33,7 @@
             z-index: 1000;
             padding: 15px 20px;
             display: flex;
-            justify-content: center;
+            justify-content: center; /* Центрируем меню горизонтально, как было */
             align-items: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             transition: background 0.3s;
@@ -102,20 +102,16 @@
             height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            transition: transform 0.3s;
         }
 
-        .logo-img:hover {
-            transform: rotate(5deg) scale(1.1);
-        }
 
-        /* Содержимое с отступом под меню */
-        header {
-            padding: 120px 0 20px; /* Отступ сверху для логотипа и меню (80px для меню + 40px для логотипа) */
-            text-align: center;
+        /* Содержимое с отступом под меню (центрируем) */
+        header, .news-widget, main {
+            max-width: 600px; /* Ограничиваем ширину, как в оригинале */
             width: 100%;
-            position: relative;
-            margin: 0 auto;
+            margin: 0 auto; /* Центрируем по горизонтали */
+            padding: 120px 0 20px; /* Сохраняем отступ сверху для навигации */
+            text-align: center;
         }
 
         header h1 {
@@ -143,131 +139,154 @@
             color: #e0e0e0;
         }
 
-        /* Фон с улучшениями (добавляем лёгкий шум и элементы для боков) */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFElEQVR4AWP4////fwY0GNDQwMrKw8TExIQAAES0SCC7oWWgAAAABJRU5ErkJggg==') repeat;
-            opacity: 0.03;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* Элементы для боков (лёгкие абстрактные линии и точки) */
-        .side-decor {
-            position: fixed;
-            top: 0;
-            width: 50px;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .left-decor {
-            left: 0;
-            background: linear-gradient(to right, rgba(118, 199, 192, 0.1) 0%, transparent 100%);
-        }
-
-        .right-decor {
-            right: 0;
-            background: linear-gradient(to left, rgba(118, 199, 192, 0.1) 0%, transparent 100%);
-        }
-
-        .side-decor::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 1px;
-            height: 100%;
-            background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 10px, transparent 10px, transparent 20px);
-            animation: flicker 3s infinite;
-        }
-
         @keyframes flicker {
             0%, 100% { opacity: 0.1; }
             50% { opacity: 0.3; }
         }
 
-        /* Остальные стили остаются почти неизменными, но с небольшой оптимизацией */
-        .news-widget {
-            max-width: 600px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        /* Стили для "extendable classes" (применяем к .card и .news-widget) */
+        .card, .news-widget {
+            background: linear-gradient(to bottom, rgba(40, 50, 60, 0.4), rgba(30, 40, 50, 0.4));
+            border-radius: 10px; /* Сохраняем закруглённые углы */
+            padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            text-align: left;
-            transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(8px); /* Глянцевый эффект, как в expandable */
         }
 
-        .news-widget:hover {
-            transform: translateY(-5px);
+        .card:hover, .news-widget:hover {
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .news-widget h2 {
-            font-size: 1.4rem;
+        .card h2, .news-widget h2 {
+            font-size: 1.8rem; /* Сохраняем размер заголовка */
+            font-weight: 600;
             margin-bottom: 10px;
             color: #ffffff;
         }
 
-        .news-item {
+        .card p, .news-widget p, .news-item a {
+		    text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            color: #b3b3b3;
+            transition: color 0.3s;
+        }
+
+        .card p:hover, .news-item a:hover {
+		    text-decoration: none;
+            color: #e0e0e0;
+        }
+
+        .news-widget .news-item {
             padding: 10px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: background 0.3s, transform 0.3s;
         }
 
-        .news-item:last-child {
+        .news-widget .news-item:last-child {
             border-bottom: none;
         }
 
-        .news-item:hover {
+        .news-widget .news-item:hover {
             background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
         }
 
-        .news-item a {
-            text-decoration: none;
-            color: #76c7c0;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .news-item a:hover {
-            color: #4c9e94;
-        }
-
-        .news-footer {
+        .news-widget .news-footer {
             text-align: right;
             margin-top: 10px;
         }
 
-        .news-footer a {
+        .news-widget .news-footer a {
             text-decoration: none;
             color: #b3b3b3;
             font-size: 0.9rem;
             transition: color 0.3s ease, transform 0.3s;
         }
 
-        .news-footer a:hover {
+        .news-widget .news-footer a:hover {
             color: #ffffff;
-            transform: scale(1.05);
+
         }
 
-        .menu {
-            display: none; /* Скрываем старое бургер-меню, так как заменяем его новым */
+        /* Оптимизированные expandable секции (оставляем без изменений) */
+        .expandable-section {
+            max-width: 600px;
+            width: 100%;
+            margin: 0; /* Убрал отступы между блоками */
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .menu-icon, .menu-dropdown {
-            display: none; /* Убираем старое бургер-меню, так как используем новое */
+        .expandable-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
+        .expandable-header {
+            background: linear-gradient(to bottom, rgba(40, 50, 60, 0.4), rgba(30, 40, 50, 0.4));
+            padding: 20px 20px; /* Сохранил удобную высоту */
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            border: none;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: background 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0; /* Убрал круглые углы */
+            backdrop-filter: blur(8px); /* Глянцевый эффект */
+        }
+
+        .expandable-header::after {
+            content: '▾';
+            position: absolute;
+            right: 20px;
+            font-size: 0.8rem;
+            color: #76c7c0;
+            transition: transform 0.3s;
+        }
+
+        .expandable-section.active .expandable-header::after {
+            transform: rotate(180deg);
+        }
+
+        .expandable-header:hover {
+            color: #76c7c0;
+            transform: scale(1.02);
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(255, 255, 255, 0.2);
+        }
+
+        .expandable-body {
+            background: linear-gradient(to bottom, rgba(40, 50, 60, 0.1), rgba(30, 40, 50, 0.1));
+            color: #b3b3b3;
+            padding: 0px; /* Сохранил высоту для текста */
+            border-top: 1px solid rgba(255, 255, 255, 0.15); /* Усиленная тонкая горизонтальная полоска для разделения */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+            border-radius: 0; /* Убрал круглые углы */
+            backdrop-filter: blur(8px); /* Глянцевый эффект */
+        }
+
+        .expandable-section.active .expandable-body {
+            max-height: 300px;
+            padding: 20px 20px;
+            opacity: 1;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* CTA кнопка (оставляем без изменений) */
         .cta {
             margin-top: 30px;
         }
@@ -290,86 +309,7 @@
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .card h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-
-        .card p {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #cccccc;
-        }
-
-        .expandable-section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .expandable-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .expandable-header {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            max-width: 600px;
-            text-align: center;
-            color: #ffffff;
-            transition: background 0.3s, color 0.3s;
-        }
-
-        .expandable-header:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #76c7c0;
-        }
-
-        .expandable-body {
-            background: rgba(255, 255, 255, 0.05);
-            color: #cccccc;
-            padding: 0 15px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
-
-        .expandable-section.active .expandable-body {
-            max-height: 200px;
-            padding: 15px;
-        }
-
+        /* Футер (оставляем без изменений) */
         footer {
             margin-top: 50px;
             font-size: 0.9rem;
@@ -382,64 +322,48 @@
             color: #b3b3b3;
         }
 
-        /* Адаптивность */
+        /* Адаптивность для мобильных устройств */
         @media (max-width: 768px) {
             .navbar {
+                position: relative; /* Убираем фиксированное положение на мобильных */
                 padding: 10px 15px;
-                justify-content: space-between;
             }
 
             .navbar ul {
-                display: none; /* Скрываем меню на мобильных */
+                flex-direction: column; /* Переводим меню в столбец */
+                gap: 15px;
+            }
+
+            .navbar ul li:not(:last-child)::after {
+                display: none; /* Убираем косые разделители на мобильных */
+            }
+
+            header, .news-widget, main {
+                padding: 80px 0 15px; /* Уменьшаем отступ сверху для навигации */
+                max-width: 90%; /* Уменьшаем ширину для мобильных */
+            }
+
+            .card, .news-widget {
+                padding: 15px;
+            }
+
+            .card h2, .news-widget h2 {
+                font-size: 1.4rem; /* Уменьшаем размер заголовков */
+            }
+
+            .card p, .news-item a {
+                font-size: 0.9rem; /* Уменьшаем размер текста */
             }
 
             .logo-container {
-                position: relative;
-                top: 0;
-                left: 0;
-                transform: none;
-                margin-right: 10px;
+                top: 10px; /* Уменьшаем отступ для логотипа */
+                width: 80px; /* Уменьшаем размер логотипа */
+                height: 80px;
             }
 
             .logo-img {
-                width: 60px;
-                height: 60px;
-            }
-
-            header {
-                padding: 80px 0 20px; /* Уменьшаем отступ для мобильных */
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            .news-widget, .card, .expandable-section {
-                max-width: 90%;
-            }
-
-            .menu-icon {
-                display: block; /* Показываем бургер-меню на мобильных */
-                top: 10px;
-                right: 10px;
-            }
-
-            .menu-icon div {
-                width: 25px;
-                height: 2px;
-            }
-
-            .expandable-header {
-                font-size: 1rem;
-                padding: 12px;
-            }
-
-            .expandable-body {
-                font-size: 0.9rem;
-            }
-
-            .side-decor {
-                width: 30px;
+                width: 80px;
+                height: 80px;
             }
         }
     </style>
@@ -447,11 +371,6 @@
         function toggleSection(event) {
             const section = event.currentTarget.parentElement;
             section.classList.toggle('active');
-        }
-
-        function toggleMenu() {
-            const header = document.querySelector('header');
-            header.classList.toggle('menu-open');
         }
     </script>
 </head>
@@ -469,25 +388,9 @@
         <img src="logo.png" alt="Логотип" class="logo-img" loading="lazy">
     </div>
     <header>
-        <div class="menu">
-            <div class="menu-icon" onclick="toggleMenu()">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="menu-dropdown">
-                <a href="#home">Главная</a>
-                <a href="#legal">Юридический раздел</a>
-                <a href="#about">О нас</a>
-                <a href="#crypto">Проверка криптоактивов</a>
-                <a href="#contact">Связаться</a>
-            </div>
-        </div>
         <h1>Анонимные Решения</h1>
         <p>Эффективность. Конфиденциальность. Результат.</p>
     </header>
-    <div class="side-decor left-decor"></div>
-    <div class="side-decor right-decor"></div>
     <div class="news-widget">
         <h2>Последние новости</h2>
         <div class="news-item">
@@ -529,7 +432,7 @@
         </div>
     </main>
     <footer>
-        <p>&copy; 2025 Анонимные Решения. Все права защищены.</p>
+        <p>© 2025 Анонимные Решения. Все права защищены.</p>
     </footer>
 </body>
 </html>
