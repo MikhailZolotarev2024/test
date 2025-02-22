@@ -377,10 +377,6 @@
                 padding: 10px 15px;
             }
 
-            .navbar ul {
-                flex-direction: column; /* Переводим меню в столбец */
-                gap: 15px;
-            }
 
             .navbar ul li:not(:last-child)::after {
                 display: none; /* Убираем косые разделители на мобильных */
@@ -419,6 +415,7 @@
 
             .navbar ul {
                 display: none; /* Скрываем стандартное меню на мобильных */
+				flex-direction: column; 
             }
         }
 @media (min-width: 769px) {
