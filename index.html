@@ -322,15 +322,44 @@
             color: #b3b3b3;
         }
 .burger-menu {
-            display: none; /* Скрыто по умолчанию на десктопах */
-            font-size: 24px;
-            color: #ffffff; /* Светлый цвет, как на скриншоте */
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            z-index: 1001;
-        }
+    display: none; /* Скрыто по умолчанию на десктопах */
+    font-size: 24px;
+    color: #ffffff; /* Светлый цвет, как на скриншоте */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: relative; /* Убедимся, что позиционирование корректно */
+}
+
+/* Создаём три полоски через псевдоэлемент или CSS */
+.burger-menu::before,
+.burger-menu::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: #ffffff; /* Светлый цвет полосок */
+    transition: transform 0.3s ease;
+}
+
+.burger-menu::before {
+    top: 8px;
+}
+
+.burger-menu::after {
+    bottom: 8px;
+}
+
+/* Анимация при клике (опционально, если нужно) */
+.burger-menu.active::before {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.burger-menu.active::after {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
 .nav-menu {
             position: fixed;
             top: 0;
@@ -410,13 +439,18 @@
                 height: 80px;
             }
 .burger-menu {
-                display: block; /* Показываем бургер-меню на мобильных */
-            }
+        display: block; /* Показываем бургер-меню на мобильных */
+    }
 
-            .navbar ul {
-                display: none; /* Скрываем стандартное меню на мобильных */
-				flex-direction: column; 
-            }
+    .navbar ul {
+        display: none; /* Скрываем стандартное меню на мобильных */
+        flex-direction: column; /* Оставляем для корректного стека на случай, если меню будет показано */
+    }
+
+    .navbar {
+        padding: 10px 15px; /* Сохраняем отступы */
+        justify-content: flex-start; /* Смещаем содержимое влево, чтобы поместить бургер-меню */
+    }
         }
 @media (min-width: 769px) {
                 .burger-menu {
@@ -441,7 +475,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <button class="burger-menu" onclick="toggleNav()">&#9776;</button> <!-- Иконка бургер-меню -->
+
         <ul>
             <li><a href="#home">Главная</a></li>
             <li><a href="#legal">Юридический раздел</a></li>
@@ -451,6 +485,7 @@
         </ul>
         <div class="nav-menu">
             <ul>
+			<button class="burger-menu" onclick="toggleNav()"></button>
                 <li><a href="#home">Главная</a></li>
                 <li><a href="#legal">Юридический раздел</a></li>
                 <li><a href="#about">О нас</a></li>
