@@ -413,7 +413,23 @@
                 width: 80px;
                 height: 80px;
             }
+.burger-menu {
+                display: block; /* Показываем бургер-меню на мобильных */
+            }
+
+            .navbar ul {
+                display: none; /* Скрываем стандартное меню на мобильных */
+            }
         }
+@media (min-width: 769px) {
+                .burger-menu {
+                    display: none; /* Скрываем бургер-меню на десктопах */
+                }
+
+                .navbar ul {
+                    display: flex; /* Показываем стандартное меню на десктопах */
+                }
+            }
     </style>
     <script>
         function toggleSection(event) {
