@@ -87,16 +87,14 @@
             background: #76c7c0;
         }
 
-        /* Бургер-меню */
-        .menu-icon {
-            margin-right: 10vw;
+.menu-icon {
             display: none;
             cursor: pointer;
             flex-direction: column;
             gap: 5px;
             position: fixed;
-            top: 2%;
-            right: 2%;
+            top: 20px;
+            right: 20px;
             z-index: 1002;
         }
 
@@ -118,30 +116,35 @@
 
         .menu-icon.active div:nth-child(3) {
             transform: translateY(-8px) rotate(-45deg);
-        }.menu-dropdown a {
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .menu-dropdown a {
             display: block;
             text-decoration: none;
             color: #e0e0e0;
-            padding: 5px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.3s, color 0.3s;
+            padding: 10px;
             font-size: 1rem;
             font-weight: 400;
+            transition: background 0.3s, color 0.3s;
         }
 
         .menu-dropdown a:hover {
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            color: #76c7c0;
         }
-
-        .menu-dropdown a:last-child {
-            border-bottom: none;
-        }
-
-        .menu-open .menu-dropdown {
-            display: block;
-        }
-        /* Выезжающее меню */
 
         /* Логотип */
         .logo-container {
@@ -409,10 +412,11 @@
     <script>
         // Переключение выезжающего меню
 function toggleMenu() {
-            const header = document.querySelector('header');
-            header.classList.toggle('menu-open');
-        }
-
+            const menuIcon = document.querySelector('.menu-icon');
+            const menuDropdown = document.querySelector('.menu-dropdown');
+            menuIcon.classList.toggle('active');
+            menuDropdown.classList.toggle('active');
+			}
         // Переключение expandable секций
         function toggleSection(event) {
             const section = event.target.parentElement;
@@ -435,6 +439,13 @@ function toggleMenu() {
             <li><a href="#contact">Связаться</a></li>
         </ul>
     </nav>
+    <div class="menu-dropdown">
+        <a href="#home">Главная</a>
+        <a href="#legal">Юридический раздел</a>
+        <a href="#about">О нас</a>
+        <a href="#crypto">Проверка криптоактивов</a>
+        <a href="#contact">Связаться</a>
+    </div>
     <div class="logo-container">
         <img src="logo.png" alt="Логотип" class="logo-img" loading="lazy">
     </div>
