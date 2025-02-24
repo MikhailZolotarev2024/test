@@ -6,6 +6,8 @@
     <title>Анонимные Решения</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
 
         /* Общие стили */
         body {
@@ -145,7 +147,9 @@
             background: rgba(255, 255, 255, 0.1);
             color: #76c7c0;
         }
-
+.menu-dropdown.active {
+  display: block;
+}
         /* Логотип */
         .logo-container {
             position: absolute;
@@ -214,7 +218,14 @@
             margin-bottom: 10px;
             color: #ffffff;
         }
-
+        .card h3{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;       /* Можно чуть увеличить, например, 1.1rem */
+    line-height: 1.6;      /* Комфортная межстрочная высота */
+    color: #b3b3b3;        /* Мягкий светлый оттенок на тёмном фоне */
+    margin: 20px 0;        /* Отступы сверху/снизу */
+    text-align: center;    /* Если хотите центрировать текст */
+}
         .card p, .news-widget p, .news-item a {
             text-decoration: none;
             font-size: 1rem;
@@ -260,7 +271,7 @@
         .expandable-section {
             max-width: 600px;
             width: 100%;
-            margin: 0;
+            margin-bottom: 20px;
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -350,9 +361,60 @@
         footer:hover {
             color: #b3b3b3;
         }
-.menu-dropdown.active {
-  display: block;
+
+.icon-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr); /* Две колонки по умолчанию, можно расширить */
+    gap: 20px;
+    width: 100%;
+    margin: 30px auto;
+
+	align-items: center;
+    justify-content: center;
 }
+
+.icon-card {
+    background: linear-gradient(to bottom, rgba(40, 50, 60, 0.4), rgba(30, 40, 50, 0.4));
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    transition: box-shadow 0.3s, transform 0.3s;
+    text-align: center;
+	align-items: center;
+    justify-content: center;
+}
+.icon-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.icon-img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+    filter: grayscale(100%) opacity(0.8);
+    transition: filter 0.3s;
+	align-items: center;
+    justify-content: center;
+}
+
+.icon-card:hover .icon-img {
+    filter: grayscale(0%) opacity(1);
+}
+
+.icon-card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #b3b3b3;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.icon-card:hover p {
+    color: #e0e0e0;
+}
+
         /* Медиа-запросы */
         @media (max-width: 768px) {
             .logo-container {
@@ -399,6 +461,24 @@
                 width: 80px;
                 height: 80px;
             }
+.icon-grid {
+        grid-template-columns: 1fr; /* Одна колонка на мобильных устройствах */
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .icon-card {
+        padding: 15px;
+    }
+
+    .icon-img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .icon-card p {
+        font-size: 0.9rem;
+    }
         }
 
         @media (min-width: 769px) {
@@ -410,6 +490,17 @@
                 display: none;
             }
         }
+		
+.no-select {
+  /* Для современных браузеров */
+  user-select: none;
+
+  /* Префиксы для старых версий */
+  -webkit-user-select: none;  /* Chrome/Safari/Opera */
+  -moz-user-select: none;     /* Старые версии Firefox */
+  -ms-user-select: none;      /* IE/старые Edge */
+  -o-user-select: none;       /* Некоторые старые браузеры Opera */
+}
     </style>
     <script>
         // Переключение выезжающего меню
@@ -491,6 +582,28 @@ function toggleMenu() {
             <div class="expandable-header" onclick="toggleSection(event)">Как связаться</div>
             <div class="expandable-body">Свяжитесь с нами через наш сайт или мессенджеры, и мы оперативно ответим на ваш запрос.</div>
         </div>
+<div class="card">
+
+            <h3>Мы объединяем опыт специалистов из разных областей, чтобы комплексно решать задачи по возврату средств и защите интересов наших клиентов. Наша команда обеспечивает полную конфиденциальность на каждом этапе — от первичного аудита и сбора доказательств до юридического сопровождения и взаимодействия с финансовыми организациями. Мы работаем как с традиционными, так и с цифровыми активами, используя передовые инструменты анализа и международные партнёрские сети. Главная цель — максимально оперативно и безопасно восстановить ваши активы, сохраняя анонимность и прозрачность всех процессов.</h3>
+        </div>
+		<div class="icon-grid">
+    <div class="icon-card no-select">
+        <img src="icon1.svg" alt="Конфиденциальная встреча" class="icon-img">
+        <p>Конфиденциальная встреча</p>
+    </div>
+    <div class="icon-card no-select">
+        <img src="icon2.svg" alt="Согласование цены" class="icon-img">
+        <p>Согласование цены</p>
+    </div>
+    <div class="icon-card no-select">
+        <img src="icon3.svg" alt="Действие" class="icon-img">
+        <p>Действие</p>
+    </div>
+    <div class="icon-card no-select">
+        <img src="icon4.svg" alt="Результат" class="icon-img">
+        <p>Результат</p>
+    </div>
+</div>
         <div class="cta">
             <a href="#">Связаться с нами</a>
         </div>
