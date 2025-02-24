@@ -368,6 +368,17 @@
 
         /* Медиа-запросы */
         @media (max-width: 768px) {
+            .logo-container {
+                top: 10px; /* Меньше отступ сверху */
+                width: 80px; /* Уменьшаем размер логотипа */
+                height: 80px;
+            }
+
+            .logo-img {
+        width: 80px;
+        height: 80px;
+            }
+
             .menu-icon {
                 display: flex;
             }
@@ -430,32 +441,21 @@
     </script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="menu-icon" onclick="toggleNav()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <ul>
-            <li><a href="#home">Главная</a></li>
-            <li><a href="#legal">Юридический раздел</a></li>
-            <li><a href="#about">О нас</a></li>
-            <li><a href="#crypto">Проверка криптоактивов</a></li>
-            <li><a href="#contact">Связаться</a></li>
-        </ul>
-        <div class="nav-menu">
-            <ul>
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#legal">Юридический раздел</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#crypto">Проверка криптоактивов</a></li>
-                <li><a href="#contact">Связаться</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="logo-container">
-        <img src="logo.png" alt="Логотип" class="logo-img" loading="lazy">
+<nav class="navbar">
+    <div class="menu-icon" onclick="toggleNav()">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
+    <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#contact">Связаться</a></li>
+    </ul>
+    <div class="logo-container">
+        <img src="logo.png" alt="Логотип" class="logo-img">
+    </div>
+</nav>
     <header>
         <h1>Анонимные Решения</h1>
         <p>Эффективность. Конфиденциальность. Результат.</p>
