@@ -334,6 +334,7 @@
 }
 
 /* Создаём три полоски через псевдоэлемент или CSS */
+.burger-menu span,
 .burger-menu::before,
 .burger-menu::after {
     content: '';
@@ -350,6 +351,9 @@
 
 .burger-menu::after {
     bottom: 8px;
+}
+.burger-menu.active span {
+    opacity: 0; /* Скрываем среднюю полоску при активации */
 }
 
 /* Анимация при клике (опционально, если нужно) */
@@ -400,58 +404,52 @@
             transform: scale(1.05);
         }
         /* Адаптивность для мобильных устройств */
-        @media (max-width: 768px) {
-            .navbar {
-                position: relative; /* Убираем фиксированное положение на мобильных */
-                padding: 10px 15px;
-            }
-
-
-            .navbar ul li:not(:last-child)::after {
-                display: none; /* Убираем косые разделители на мобильных */
-            }
-
-            header, .news-widget, main {
-                padding: 80px 0 15px; /* Уменьшаем отступ сверху для навигации */
-                max-width: 90%; /* Уменьшаем ширину для мобильных */
-            }
-
-            .card, .news-widget {
-                padding: 15px;
-            }
-
-            .card h2, .news-widget h2 {
-                font-size: 1.4rem; /* Уменьшаем размер заголовков */
-            }
-
-            .card p, .news-item a {
-                font-size: 0.9rem; /* Уменьшаем размер текста */
-            }
-
-            .logo-container {
-                top: 10px; /* Уменьшаем отступ для логотипа */
-                width: 80px; /* Уменьшаем размер логотипа */
-                height: 80px;
-            }
-
-            .logo-img {
-                width: 80px;
-                height: 80px;
-            }
-.burger-menu {
+@media (max-width: 768px) {
+    .burger-menu {
         display: block; /* Показываем бургер-меню на мобильных */
-    }
-
-    .navbar ul {
-        display: none; /* Скрываем стандартное меню на мобильных */
-        flex-direction: column; /* Оставляем для корректного стека на случай, если меню будет показано */
+        position: fixed; /* Фиксируем в правом верхнем углу */
+        top: 10px; /* Отступ сверху */
+        right: 10px; /* Отступ справа */
     }
 
     .navbar {
-        padding: 10px 15px; /* Сохраняем отступы */
-        justify-content: flex-start; /* Смещаем содержимое влево, чтобы поместить бургер-меню */
+        position: relative; /* Оставляем navbar относительным */
+        padding: 10px 15px;
+        justify-content: flex-start; /* Смещаем содержимое влево */
     }
-        }
+
+    .navbar ul {
+        display: none; /* Скрываем стандартное меню */
+    }
+
+    header, .news-widget, main {
+        padding: 80px 0 15px; /* Уменьшаем отступ сверху для навигации */
+        max-width: 90%; /* Уменьшаем ширину для мобильных */
+    }
+
+    .card, .news-widget {
+        padding: 15px;
+    }
+
+    .card h2, .news-widget h2 {
+        font-size: 1.4rem; /* Уменьшаем размер заголовков */
+    }
+
+    .card p, .news-item a {
+        font-size: 0.9rem; /* Уменьшаем размер текста */
+    }
+
+    .logo-container {
+        top: 10px; /* Уменьшаем отступ для логотипа */
+        width: 80px; /* Уменьшаем размер логотипа */
+        height: 80px;
+    }
+
+    .logo-img {
+        width: 80px;
+        height: 80px;
+    }
+}
 @media (min-width: 769px) {
                 .burger-menu {
                     display: none; /* Скрываем бургер-меню на десктопах */
@@ -474,8 +472,16 @@
     </script>
 </head>
 <body>
-    <nav class="navbar">
-
+   <nav class="navbar">
+    <button class="burger-menu" onclick="toggleNav()"><span></span></button> <!-- Перемещаем сюда -->
+    <ul>
+        <li><a href="#home">Главная</a></li>
+        <li><a href="#legal">Юридический раздел</a></li>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#crypto">Проверка криптоактивов</a></li>
+        <li><a href="#contact">Связаться</a></li>
+    </ul>
+    <div class="nav-menu">
         <ul>
             <li><a href="#home">Главная</a></li>
             <li><a href="#legal">Юридический раздел</a></li>
@@ -483,17 +489,8 @@
             <li><a href="#crypto">Проверка криптоактивов</a></li>
             <li><a href="#contact">Связаться</a></li>
         </ul>
-        <div class="nav-menu">
-            <ul>
-			<button class="burger-menu" onclick="toggleNav()"></button>
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#legal">Юридический раздел</a></li>
-                <li><a href="#about">О нас</a></li>
-                <li><a href="#crypto">Проверка криптоактивов</a></li>
-                <li><a href="#contact">Связаться</a></li>
-            </ul>
-        </div>
-    </nav>
+    </div>
+</nav>
     <div class="logo-container">
         <img src="logo.png" alt="Логотип" class="logo-img" loading="lazy">
     </div>
