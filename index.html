@@ -118,8 +118,29 @@
 
         .menu-icon.active div:nth-child(3) {
             transform: translateY(-8px) rotate(-45deg);
+        }.menu-dropdown a {
+            display: block;
+            text-decoration: none;
+            color: #e0e0e0;
+            padding: 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s, color 0.3s;
+            font-size: 1rem;
+            font-weight: 400;
         }
 
+        .menu-dropdown a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .menu-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .menu-open .menu-dropdown {
+            display: block;
+        }
         /* Выезжающее меню */
 
         /* Логотип */
@@ -387,11 +408,9 @@
     </style>
     <script>
         // Переключение выезжающего меню
-        function toggleNav() {
-            const navMenu = document.querySelector('.nav-menu');
-            const menuIcon = document.querySelector('.menu-icon');
-            navMenu.classList.toggle('active');
-            menuIcon.classList.toggle('active');
+function toggleMenu() {
+            const header = document.querySelector('header');
+            header.classList.toggle('menu-open');
         }
 
         // Переключение expandable секций
@@ -403,7 +422,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="menu-icon" onclick="toggleNav()">
+        <div class="menu-icon" onclick="toggleMenu()">
             <div></div>
             <div></div>
             <div></div>
